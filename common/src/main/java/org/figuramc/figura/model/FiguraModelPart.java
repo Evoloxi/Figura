@@ -1,10 +1,7 @@
 package org.figuramc.figura.model;
 
-import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.world.phys.Vec3;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
@@ -25,8 +22,6 @@ import org.figuramc.figura.model.rendering.texture.RenderTypes;
 import org.figuramc.figura.model.rendertasks.*;
 import org.figuramc.figura.utils.LuaUtils;
 import org.figuramc.figura.utils.ui.UIHelper;
-import org.joml.Matrix3f;
-import org.joml.Quaternionf;
 import org.luaj.vm2.*;
 
 import java.util.*;
@@ -711,17 +706,24 @@ public class FiguraModelPart implements Comparable<FiguraModelPart> {
                     argumentTypes = Boolean.class,
                     argumentNames = "shade"
             ),
-            aliases = "setShading",
-            value = "model_part.set_secondary_render_type"
+            value = "model_part.shading"
     )
-    public FiguraModelPart setShade(boolean shade) {
-        this.customization.setShade(shade);
+    public FiguraModelPart shading(boolean shade) {
+        this.customization.shade(shade);
         return this;
     }
 
     @LuaWhitelist
     public FiguraModelPart shade(boolean shade) {
-        return setShade(shade);
+        return shading(shade);
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+            value = "model_part.no_shading"
+    )
+    public FiguraModelPart noShading(boolean noShading) {
+        return shading(!noShading);
     }
 
     @LuaWhitelist
