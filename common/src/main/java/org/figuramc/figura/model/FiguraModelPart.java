@@ -706,6 +706,7 @@ public class FiguraModelPart implements Comparable<FiguraModelPart> {
                     argumentTypes = Boolean.class,
                     argumentNames = "shade"
             ),
+            aliases = "shade",
             value = "model_part.shading"
     )
     public FiguraModelPart shading(boolean shade) {
@@ -720,10 +721,24 @@ public class FiguraModelPart implements Comparable<FiguraModelPart> {
 
     @LuaWhitelist
     @LuaMethodDoc(
-            value = "model_part.no_shading"
+            value = "model_part.no_shading",
+            overloads = @LuaMethodOverload(
+                    argumentTypes = Boolean.class,
+                    argumentNames = "noShade"
+            ),
+            aliases = "noShade"
     )
     public FiguraModelPart noShading(boolean noShading) {
         return shading(!noShading);
+    }
+
+    @LuaWhitelist
+    public FiguraModelPart noShade(boolean noShade) { return noShading(noShade); }
+
+    @LuaWhitelist
+    @LuaMethodDoc("model_part.is_shaded")
+    public Boolean isShaded() {
+        return this.customization.isShaded();
     }
 
     @LuaWhitelist
