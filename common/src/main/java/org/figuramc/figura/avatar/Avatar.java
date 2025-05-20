@@ -4,7 +4,6 @@ import com.mojang.blaze3d.audio.SoundBuffer;
 import com.mojang.blaze3d.opengl.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.platform.NativeImage;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Axis;
@@ -554,7 +553,7 @@ public class Avatar {
         renderer.setupRenderer(
                 PartFilterScheme.WORLD, bufferSource, stack,
                 tickDelta, lightFallback, 1f, OverlayTexture.NO_OVERLAY,
-                false, false,
+                false, false, true,
                 camX, camY, camZ
         );
 
